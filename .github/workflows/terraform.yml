@@ -1,0 +1,41 @@
+name: aws infrastructure deployment
+on:
+  push:
+    branches:
+      main
+jobs:
+  terraform-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Clone our repository
+        uses: actions/checkout@v3
+
+      - name: AWS Authetication
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::217741831553:role/migration_lab_github_oidc_role
+          #role-to-assume: arn:aws:iam::aws:policy/AdministratorAccess
+          aws-region: eu-west-1
+          role-session-name: githubVPCDeploy 
+
+      - name: Terraform set up
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform initialization
+        run: terraform init
+
+      - name: Terraform format
+        run: terraform fmt
+
+      - name: Terraform validate
+        run: terraform validate 
+
+      - name: Terraform planning
+        run: terraform plan
+
+      - name: Terraform applying
+        run: terraform apply -auto-approve

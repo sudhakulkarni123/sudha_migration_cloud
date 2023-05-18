@@ -7,9 +7,10 @@ data "aws_availability_zones" "available" {
 #   private_zone = false
 # }
 
-data "aws_route53_zone" "sudha_z" {
-  name = "sudha_mglab.aws.crlabs.cloud"
-  vpc_id = module.vpc.vpc_id
-  private_zone = false
-}
+# data "aws_route53_zone" "sudha_z" {
+#   name = "capci-grpb.aws.crlabs.cloud"
+#   #vpc_id = module.vpc.vpc_id
+#   private_zone = false
+# }
+
 

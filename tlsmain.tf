@@ -6,8 +6,8 @@
 
 # request public certificates from the amazon certificate manager.
 resource "aws_acm_certificate" "acm_certificate" {
-  domain_name               = "sudha_mglab.aws.crlabs.cloud"
-  subject_alternative_names = ["*.sudha_mglab.aws.crlabs.cloud"]
+  domain_name               = "capci-grpb.aws.crlabs.cloud"
+  subject_alternative_names = ["*.capci-grpb.aws.crlabs.cloud"]
   validation_method         = "DNS"
 
   lifecycle {
@@ -37,7 +37,7 @@ resource "aws_route53_record" "route53_record" {
   records         = [each.value.record]
   ttl             = 60
   type            = each.value.type
-  zone_id         = data.aws_route53_zone.sudha_z.zone_id
+  zone_id         = aws_route53_zone.sudha_z.zone_id
 }
 
  #validate acm certificates
