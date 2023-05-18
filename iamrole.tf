@@ -46,7 +46,7 @@ data "aws_iam_policy_document" "github_actions_assume_role" {
  
 resource "aws_iam_role_policy_attachment" "github_actions_iam_policy" {
     role = aws_iam_role.migration_oidc_role.id
-    #policy_arn = ["arn:aws:iam::aws:policy/AdministratorAccess"],
-    policy_arn = "arn:aws:iam::aws:policy/AWSDirectConnectFullAccess"
+    policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+    #policy_arn = "arn:aws:iam::aws:policy/AWSDirectConnectFullAccess"
                  
 }
