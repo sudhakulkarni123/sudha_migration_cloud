@@ -2,7 +2,7 @@ name: aws infrastructure deployment
 on:
   push:
     branches:
-      main
+      githubactions
 jobs:
   terraform-deploy:
     runs-on: ubuntu-latest
