@@ -6,7 +6,7 @@
 
 repos:
   - repos: https://github.com/awslabs/git-secrets
-    rev: master
+    rev: githubactions
     hooks:
       - id: git-secrets
         name: git-secrets
