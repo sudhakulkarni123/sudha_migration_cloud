@@ -17,7 +17,7 @@ jobs:
       - name: AWS Authetication
         uses: aws-actions/configure-aws-credentials@v1
         with:
-          role-to-assume: arn:aws:arn:aws:iam::217741831553:role/migration_lab_github_oidc_role
+          role-to-assume: arn:aws:iam::217741831553:role/migration_lab_github_oidc_role
           aws-region: eu-west-1  
           role-session-name: GithubEC2Deploy
 
