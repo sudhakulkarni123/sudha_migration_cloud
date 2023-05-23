@@ -1,8 +1,8 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = var.vpc_name
-  cidr = var.vpc_cidr
+  name = local.vpc_name
+  cidr = local.vpc_cidr
 
   azs                        = local.availability-zones
   private_subnets            = [for i, v in local.availability-zones : cidrsubnet(local.private_subnet_cidr, 2, i)]
