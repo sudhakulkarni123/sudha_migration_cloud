@@ -1,7 +1,7 @@
 # configured aws provider with proper credentials
 #provider "aws" {
- # region    = eu-west-1
- # profile   = "sudha-migration-lab"
+# region    = eu-west-1
+# profile   = "sudha-migration-lab"
 #}
 
 # request public certificates from the amazon certificate manager.
@@ -40,13 +40,13 @@ resource "aws_route53_record" "route53_record" {
   zone_id         = aws_route53_zone.sudha_z.zone_id
 }
 
- #validate acm certificates
- resource "aws_acm_certificate_validation" "acm_certificate_validation" {
-   certificate_arn         = aws_acm_certificate.acm_certificate.arn
-   validation_record_fqdns = [for record in aws_route53_record.route53_record : record.fqdn]
- }
+#validate acm certificates
+resource "aws_acm_certificate_validation" "acm_certificate_validation" {
+  certificate_arn         = aws_acm_certificate.acm_certificate.arn
+  validation_record_fqdns = [for record in aws_route53_record.route53_record : record.fqdn]
+}
 
 resource "time_sleep" "wait_30_seconds" {
-   depends_on = [ aws_route53_record.route53_record ]
-   create_duration = "120s"
+  depends_on      = [aws_route53_record.route53_record]
+  create_duration = "120s"
 }
