@@ -1,9 +1,3 @@
-# configured aws provider with proper credentials
-#provider "aws" {
-# region    = eu-west-1
-# profile   = "sudha-migration-lab"
-#}
-
 # request public certificates from the amazon certificate manager.
 resource "aws_acm_certificate" "acm_certificate" {
   domain_name               = "capci-grpb.aws.crlabs.cloud"
@@ -14,13 +8,6 @@ resource "aws_acm_certificate" "acm_certificate" {
     create_before_destroy = true
   }
 }
-
-# get details about a route 53 hosted zone
-# data "aws_route53_zone" "route53_zones" {
-#   name         = "capci-grpb.aws.crlabs.cloud"
-#   vpc_id = module.vpc.vpc_id
-#   private_zone = false
-# }
 
 # create a record set in route 53 for domain validatation
 resource "aws_route53_record" "route53_record" {
