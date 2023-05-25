@@ -39,7 +39,7 @@ resource "aws_lb_listener" "alb_listener_80" {
   load_balancer_arn = aws_lb.migration_alb.arn
   port              = "80"
   protocol          = "HTTP"
-#   default_action {
+  #   default_action {
   #     type             = "forward"
   #     target_group_arn = aws_lb_target_group.target_group_alb.arn
   #   }
@@ -82,21 +82,21 @@ resource "aws_lb_listener" "front_end" {
   #certificate_arn = "arn:aws:acm:eu-west-1:217741831553:certificate/f3ee1939-5812-497a-8ed1-18cc17caf098"
   certificate_arn = aws_acm_certificate.acm_certificate.arn
 
-default_action {
-    type             = "forward"
+  default_action {
+    type = "forward"
     #target_group_arn = aws_lb_target_group.target_group_alb.arn
     target_group_arn = aws_lb_target_group.target_group_alb.arn
-  } 
+  }
 }
-  # default_action {
-  #   type = "fixed-response"
+# default_action {
+#   type = "fixed-response"
 
-  #   fixed_response {
-  #     content_type = "text/plain"
-  #     message_body = "fixed response content"
-  #     status_code  = "200"
-  #   }
-  # }
+#   fixed_response {
+#     content_type = "text/plain"
+#     message_body = "fixed response content"
+#     status_code  = "200"
+#   }
+# }
 
 #resource "aws_route53_record" "aliaslb" {
 resource "aws_route53_record" "route53_records" {
