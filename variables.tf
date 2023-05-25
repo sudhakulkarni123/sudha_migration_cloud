@@ -17,24 +17,24 @@ variable "cidr" {
   default     = "10.0.0.0/16"
 }
 
-variable "vpc_id" {
-  description = "vpc id to use"
-  type        = string
-  default     = ""
-}
+# variable "vpc_id" {
+#   description = "vpc id to use"
+#   type        = string
+#   default     = ""
+# }
 
-variable "availability_zones" {
-  type        = list(string)
-  description = "list of availability zones"
-  default     = [""]
-}
+# variable "availability_zones" {
+#   type        = list(string)
+#   description = "list of availability zones"
+#   default     = [""]
+# }
 
 
-variable "database_subnet_group_name" {
-  description = "name of the database subnet group"
-  type        = string
-  default     = ""
-}
+# variable "database_subnet_group_name" {
+#   description = "name of the database subnet group"
+#   type        = string
+#   default     = ""
+# }
 
 variable "tags" {
   description = "for resources"
@@ -42,12 +42,12 @@ variable "tags" {
   default     = {}
 }
 
-variable "aws_security_groups" {
-  description = "name of the aws_security_groups"
-  type        = string
-  default     = ""
+# variable "aws_security_groups" {
+#   description = "name of the aws_security_groups"
+#   type        = string
+#   default     = ""
 
-}
+# }
 
 variable "private_subnets_cidr" {
   type        = list(string)
