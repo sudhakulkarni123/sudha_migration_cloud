@@ -34,7 +34,7 @@ jobs:
 
       - name: Terraform applying
         run: terraform apply -auto-approve
-tflint:
+  tflint:
     name: TFLint
     runs-on: ubuntu-latest
     steps:
