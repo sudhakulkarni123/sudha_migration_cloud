@@ -11,7 +11,7 @@ variable "vpc_name" {
   default     = ""
 }
 
-variable "vpc_cidr" {
+variable "cidr" {
   description = "cidr to use"
   type        = string
   default     = ""
