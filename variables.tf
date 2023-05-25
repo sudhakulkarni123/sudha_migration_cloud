@@ -23,11 +23,11 @@ variable "cidr" {
 #   default     = ""
 # }
 
-# variable "availability_zones" {
-#   type        = list(string)
-#   description = "list of availability zones"
-#   default     = [""]
-# }
+variable "availability_zones" {
+  type        = list(string)
+  description = "list of availability zones"
+  default     = [""]
+}
 
 
 # variable "database_subnet_group_name" {

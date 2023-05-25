@@ -22,6 +22,7 @@ resource "aws_security_group" "internet_face" {
   }
 
   egress {
+    description = "TLS from vpc"
     from_port        = 0
     to_port          = 0
     protocol         = "-1"
