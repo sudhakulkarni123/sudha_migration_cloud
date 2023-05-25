@@ -1,0 +1,75 @@
+name: aws infrastructure deployment
+on:
+  push:
+    branches:
+      githubactions
+jobs:
+  terraform-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      packages: write
+      contents: read
+      id-token: write
+    steps:
+      - name: Clone our repository
+        uses: actions/checkout@v3
+
+      - name: AWS Authetication
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          role-to-assume: arn:aws:iam::217741831553:role/migration_lab_github_oidc_role
+          aws-region: eu-west-1  
+          role-session-name: GithubEC2Deploy
+
+      - name: Terraform set up
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: v1.2.6
+
+      - name: Terraform initialization
+        run: terraform init
+
+      - name: Terraform planning
+        run: terraform plan
+
+      - name: Terraform applying
+        run: terraform apply -auto-approve
+  tflint:
+    name: TFLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - uses: terraform-linters/setup-tflint@v3
+        name: Setup TFLint
+        with:
+          tflint_version: v0.44.1
+
+      - name: Show version
+        run: tflint --version
+
+      - name: Init TFLint
+        run: tflint --init
+        env:
+        # https://github.com/terraform-linters/tflint/blob/master/docs/user-guide/plugins.md#avoiding-rate-limiting
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Run TFLint
+        run: tflint -f compact
+        
+  checkov-job:
+    runs-on: ubuntu-latest
+    name: checkov-action
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@master
+
+      - name: Run Checkov action
+        id: checkov
+        uses: bridgecrewio/checkov-action@master
+        with:
+          directory: .
+          framework: terraform  
+          soft_fail: false
+          quiet: true      #display only failed checks
+          skip_check: CKV_AWS_150,CKV_AWS_131,CKV_AWS_91,CKV_AWS_274,CKV2_AWS_23,CKV2_AWS_39,CKV2_AWS_28,CKV2_AWS_38   
