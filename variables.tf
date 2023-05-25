@@ -52,13 +52,13 @@ variable "aws_security_groups" {
 variable "private_subnets_cidr" {
   type        = list(string)
   description = "list of private subnet cidr"
-  default     = [""]
+  default     = ["10.0.128.0/19", "10.0.160.0/19"]
 }
 
 variable "public_subnets_cidr" {
   type        = list(string)
   description = "list of public subnet cidr"
-  default     = [""]
+  default     = ["10.0.0.0/19", "10.0.32.0/19"]
 }
 
 variable "private_subnet_names" {
@@ -76,7 +76,7 @@ variable "public_subnet_names" {
 variable "database_subnets_cidr" {
   type        = list(string)
   description = "list of database subnets cidr"
-  default     = [""]
+  default     = ["10.0.64.0/20", "10.0.80.0/20"]
 }
 
 variable "database_subnet_names" {
