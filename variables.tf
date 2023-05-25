@@ -14,7 +14,7 @@ variable "vpc_name" {
 variable "cidr" {
   description = "cidr to use"
   type        = string
-  default     = ""
+  default     = "10.0.0.0/16"
 }
 
 variable "vpc_id" {
