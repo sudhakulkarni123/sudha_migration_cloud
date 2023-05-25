@@ -33,7 +33,7 @@ resource "aws_acm_certificate_validation" "acm_certificate_validation" {
   validation_record_fqdns = [for record in aws_route53_record.route53_record : record.fqdn]
 }
 
-resource "time_sleep" "wait_30_seconds" {
-  depends_on      = [aws_route53_record.route53_record]
-  create_duration = "120s"
-}
+# resource "time_sleep" "wait_30_seconds" {
+#   depends_on      = [aws_route53_record.route53_record]
+#   create_duration = "120s"
+# }
