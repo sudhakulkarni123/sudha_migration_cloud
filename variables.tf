@@ -5,11 +5,6 @@ variable "region" {
 
 }
 
-# variable "number_of_azs" {
-#   description = "required number of avalibility zones"
-#   type        = number
-# }
-
 variable "vpc_name" {
   description = "name of the vpc"
   type        = string
@@ -19,12 +14,19 @@ variable "vpc_name" {
 variable "vpc_cidr" {
   description = "cidr to use"
   type        = string
+  default     = ""
 }
 
 variable "vpc_id" {
   description = "vpc id to use"
   type        = string
   default     = ""
+}
+
+variable "availability_zones" {
+  type        = list(string)
+  description = "list of availability zones"
+  default     = [""]
 }
 
 
@@ -47,9 +49,38 @@ variable "aws_security_groups" {
 
 }
 
-# variable "aws_route53_zone" {
-#   description = "name of the aws_route53_zone"
-#   type = string
-#   default = ""
+variable "private_subnets_cidr" {
+  type        = list(string)
+  description = "list of private subnet cidr"
+  default     = [""]
+}
 
-# }
+variable "public_subnets_cidr" {
+  type        = list(string)
+  description = "list of public subnet cidr"
+  default     = [""]
+}
+
+variable "private_subnet_names" {
+  type        = list(string)
+  description = "list of private subnet names"
+  default     = [""]
+}
+
+variable "public_subnet_names" {
+  type        = list(string)
+  description = "list of public subnet names"
+  default     = [""]
+}
+
+variable "database_subnets_cidr" {
+  type        = list(string)
+  description = "list of database subnets cidr"
+  default     = [""]
+}
+
+variable "database_subnet_names" {
+  type        = list(string)
+  description = "list of database subnet names"
+  default     = [""]
+}
