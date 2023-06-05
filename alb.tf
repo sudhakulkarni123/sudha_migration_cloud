@@ -10,6 +10,7 @@ resource "aws_lb" "migration_alb_cloud" {
   security_groups    = [aws_security_group.internet_face_alb.id]
   access_logs {
     enabled = true
+    bucket = "sudha-migration-bucket"
   }
   drop_invalid_header_fields = true
 }
