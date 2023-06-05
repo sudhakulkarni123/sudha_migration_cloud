@@ -2,7 +2,6 @@ variable "region" {
   description = "aws region to work with"
   type        = string
   default     = ""
-
 }
 
 variable "vpc_name" {
@@ -17,11 +16,17 @@ variable "cidr" {
   default     = "10.0.0.0/16"
 }
 
-# variable "vpc_id" {
-#   description = "vpc id to use"
-#   type        = string
-#   default     = ""
-# }
+variable "onprem-cidr" {
+  description = "cidr to use on prem"
+  type        = string
+  default     = "11.0.0.0/16"
+}
+
+variable "vpc_id" {
+  description = "vpc id to use"
+  type        = string
+  default     = ""
+}
 
 variable "availability_zones" {
   type        = list(string)
@@ -29,25 +34,11 @@ variable "availability_zones" {
   default     = [""]
 }
 
-
-# variable "database_subnet_group_name" {
-#   description = "name of the database subnet group"
-#   type        = string
-#   default     = ""
-# }
-
 variable "tags" {
   description = "for resources"
   type        = map(string)
   default     = {}
 }
-
-# variable "aws_security_groups" {
-#   description = "name of the aws_security_groups"
-#   type        = string
-#   default     = ""
-
-# }
 
 variable "private_subnets_cidr" {
   type        = list(string)
@@ -67,6 +58,18 @@ variable "private_subnet_names" {
   default     = [""]
 }
 
+variable "database_subnet_group_name" {
+  type        = string
+  description = "database_subnet_group_name"
+  default     = ""
+}
+
+variable "database_subnet_group" {
+  type        = list(string)
+  description = "list of database subnets cidr"
+  default     = ["subnet-0a031f2fa60d29e72", "subnet-09633b51b70e50357", ]
+}
+
 variable "public_subnet_names" {
   type        = list(string)
   description = "list of public subnet names"
@@ -82,5 +85,31 @@ variable "database_subnets_cidr" {
 variable "database_subnet_names" {
   type        = list(string)
   description = "list of database subnet names"
-  default     = [""]
+  default     = ["migration-cloud-vpc-database-subnet-1", "migration-cloud-vpc-databse-subnet-2"]
+}
+
+
+variable "db_username" {
+  type        = string
+  description = "rds database username"
+  default     = ""
+}
+
+variable "restore_to_point_in_time" {
+  description = "nested block: NestingList, min items: 0, max items: 1"
+  type = set(object(
+    {
+      restore_time                  = string
+      source_db_instance_identifier = string
+      source_dbi_resource_id        = string
+      use_latest_restorable_time    = bool
+    }
+  ))
+  default = []
+}
+
+variable "ami_id_for_asg" {
+  type        = string
+  description = "ami for asg"
+  default     = ""
 }
