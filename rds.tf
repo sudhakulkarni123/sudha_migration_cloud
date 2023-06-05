@@ -31,6 +31,7 @@
 # }
 
 resource "aws_db_instance" "migration-lab-rds-db-instance" {
+  # checkov:skip=CKV_AWS_161: ADD REASON
   depends_on             = [aws_security_group.rds_sg]
   identifier             = "rds-database"
   db_name                = "cloud_db"

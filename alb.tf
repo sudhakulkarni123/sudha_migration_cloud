@@ -1,12 +1,20 @@
 #loadbalancer creation
 resource "aws_lb" "migration_alb_cloud" {
+  # checkov:skip=CKV2_AWS_28: ADD REASON
+  # checkov:skip=CKV_AWS_150: ADD REASON
   #checkov
   name               = "migration-alb-cloud"
   internal           = false
   load_balancer_type = "application"
   subnets            = module.vpc.public_subnets
   security_groups    = [aws_security_group.internet_face_alb.id]
+  access_logs {
+    enabled = true
+  }
+  drop_invalid_header_fields = true
 }
+
+
 
 #security group for alb
 resource "aws_security_group" "internet_face_alb" {

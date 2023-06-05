@@ -28,6 +28,18 @@ variable "vpc_id" {
   default     = ""
 }
 
+variable "peer_owner_id" {
+  description = "peer owner id to use"
+  type        = string
+  default     = ""
+}
+
+variable "onprem_vpc_id" {
+  description = "onprem vpc id to use"
+  type        = string
+  default     = ""
+}
+
 variable "availability_zones" {
   type        = list(string)
   description = "list of availability zones"
