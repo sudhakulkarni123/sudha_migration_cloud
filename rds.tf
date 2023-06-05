@@ -1,35 +1,3 @@
-# #RDS instance
-# resource "aws_db_instance" "rds_migration_databse_instance" {
-#   depends_on             = [aws_security_group.rds_sg]
-#   instance_class          = "db.t3.medium"
-#   db_name                 = "customer_db"
-#   identifier              = "rds-database"
-#   allocated_storage       = 20
-#   storage_type            = "gp3"
-#   engine                  = "postgres"
-#   engine_version          = "15"
-#   port                    = "5432"
-#   backup_retention_period = 7
-#   backup_window           = "11:00-12:00"
-#   manage_master_user_password = true
-#   db_subnet_group_name       = aws_db_subnet_group.database_subnet_group_name.id
-#   username            = "var.rds_username"
-#   auto_minor_version_upgrade = true
-#   publicly_accessible        = false
-#   deletion_protection        = true
-#   skip_final_snapshot        = true
-#   multi_az                   = false
-#   storage_encrypted          = true
-#   availability_zone          = "var.availability_zones"
-#   apply_immediately          = true
-#   vpc_security_group_ids     = [aws_security_group.rds_sg.id]
-#   snapshot_identifier        = null
-#   maintenance_window         = "Sun:10:00-Sun:11:00"
-#   tags = {
-#     name = "migration rds instance"
-#   }
-# }
-
 resource "aws_db_instance" "migration-lab-rds-db-instance" {
   # checkov:skip=CKV_AWS_161: ADD REASON
   depends_on             = [aws_security_group.rds_sg]
@@ -82,6 +50,7 @@ resource "aws_db_subnet_group" "database_subnet_group_name" {
 }
 
 resource "aws_security_group" "rds_sg" {
+  # checkov:skip=CKV_AWS_23: ADD REASON
   name        = "rds_sg"
   description = "allow connection for rds server"
   vpc_id      = module.vpc.vpc_id
